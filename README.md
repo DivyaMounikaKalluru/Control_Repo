@@ -1,5 +1,3 @@
 # Control_Repo
 
-This is a change
-
-Hello
+This is my first file in Git.
