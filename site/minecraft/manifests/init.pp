@@ -1,13 +1,14 @@
-class minecraft {
+class minecraft (
 $url = 'URL',
 $install_dir = '/opt/minecraft'
+){
 file {$install_dir:
 ensure => directory,
 }
 file {"${install_dir}/minecraft_server.jar":
 ensure => file,
 source => $url,
-before => Service{'minecraft'},
+before => Service['minecraft'],
 }
 package {'java':
 ensure => present,
@@ -23,6 +24,6 @@ source => 'puppet:///modules/minecraft/minecraft.service'
 service {'minecraft':
 ensure => running,
 enable => true,
-require => {Package{'java'}, File{"${install_dir}/eula.txt"}, File{'/etc/systemd/system/minecraft.service'}}
+require => [Package['java'], File["${install_dir}/eula.txt"], File['/etc/systemd/system/minecraft.service']],
 }
 }
